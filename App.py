@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Meta API config
-LLAMA_API_URL = "https://llama.meta.com/api/v1/chat/completions"
+LLAMA_API_URL = "https://api.llama.com/v1/chat/completions"
 LLAMA_API_KEY = os.getenv("LLAMA_API_KEY")
 
 st.set_page_config(page_title="Rabinacle AI", page_icon="🕍", layout="centered")
@@ -47,7 +47,7 @@ if user_input:
     }
 
     payload = {
-        "model": "llama3-70b-chat",
+        "model": "Llama-4-Maverick-17B-128E-Instruct-FP8",
         "messages": st.session_state.messages,
         "temperature": 0.8,
         "max_tokens": 512
@@ -56,10 +56,12 @@ if user_input:
     response = requests.post(LLAMA_API_URL, json=payload, headers=headers)
 
     if response.status_code == 200:
-        reply = response.json()["choices"][0]["message"]
+        reply = response.json()["message"]
         st.session_state.messages.append(reply)
     else:
-        st.error("Llama API call failed.")
+        st.error(f"Llama API call failed. Status: {response.status_code}")
+        st.write("Raw response:")
+        st.json(response.json())
 
 for msg in st.session_state.messages:
     if msg["role"] != "system":
