@@ -56,7 +56,11 @@ if user_input:
     response = requests.post(LLAMA_API_URL, json=payload, headers=headers)
 
     if response.status_code == 200:
-        reply = response.json()["message"]
+        data = response.json()
+        reply = {
+            "role": data["completion_message"]["role"],
+            "content": data["completion_message"]["content"]["text"]
+        }
         st.session_state.messages.append(reply)
     else:
         st.error(f"Llama API call failed. Status: {response.status_code}")
