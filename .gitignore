@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environment files
+.env
+*.env
+.env.*
+
+# Jupyter/IPython
+.ipynb_checkpoints/
+
+# Virtual environments
+env/
+venv/
+ENV/
+.rabinacle_env/
+openwebui-env/
+
+# VSCode / PyCharm / etc.
+.vscode/
+.idea/
+*.swp
+
+# Streamlit
+.streamlit/
+
+# OS files
+.DS_Store
+Thumbs.db
